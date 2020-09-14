@@ -1,0 +1,51 @@
+doctype html
+html
+  head
+    title= Form
+    link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel="stylesheet" type="text/css" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/smoothness/jquery-ui.css" media="all")
+    script(type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js")
+    script(type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js")
+    script(src='javascripts/bootstrap.min.js')
+  body
+  .container
+   block content
+   form()
+    .col-lg-6
+      .form-group
+       label Parent's Name
+       input.form-control(name='name', type='text',placeholder='Enter Name',id="name",required="required")
+      .form-group
+       label Parent's Contact Number
+       input.form-control(name='pname', type='text',placeholder="Enter Parent's Contact Number",id="pname",required="required")
+      .form-group
+       label Parent's Email ID
+       input.form-control(name='pid', type='text',placeholder="Enter Parent's Email ID",id="pid",required="required")
+      .form-group
+       label Child's Name
+       input.form-control(name='cname', type='text',placeholder="Enter Child's Name",id="cname",required="required")
+      .form-group
+       label Child's Age
+       input.form-control(name='age', type='text',placeholder="Enter Child's Age",id="age",required="required")
+      .form-group
+       label Course Name
+       select.form-control()
+        each val in dataJSON.course_name
+         option(value=val)= val
+      .form-group
+       label Suitable Date for trial class
+       input.form-control(name='name',type='text',id="datepicker" placeholder="Select Suitable date for trial class")
+       script()
+         $("#datepicker").datepicker({dateFormat:'dd-mm-yy',minDate: +0,maxDate: +7});
+      .form-group
+       label Suitable time slot for trial class
+       select.form-control()
+        option(value="") Select suitable time slot
+        each val in dataJSON.slots
+         if (new Date().setHours(new Date().getHours()+4) < val) || (new Date().setHours(new Date().getHours()+4)== val)
+          option(value=new Date(val*1000).toLocaleString('en-US',{hour:'numeric',minute:'numeric',hour12:true}))= new Date(val*1000).toLocaleString('en-US',{hour:'numeric',minute:'numeric',hour12:true})
+      input.btn.btn-primary(type="submit",name='submit', value='Submit')
+      input.btn.btn-default(type='reset', name='reset', value='Reset')
+      script(src='https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js')
+      script(src='javascripts/bootstrap.min.js')
